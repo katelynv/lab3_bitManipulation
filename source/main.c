@@ -14,10 +14,46 @@
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-
+	DDRA = 0x00; PORTA = 0xFF;
+	DDRB = 0x00; PORTB = 0xFF;
+	DDRC = 0xFF; PORTC = 0x00;
+	unsigned char temp = 0x00;
+	unsigned char count = 0x00;
     /* Insert your solution below */
     while (1) {
-
+	temp = PINA & 0x01;
+	if (temp == 0x01) {
+		count = count + 1;
+	}
+	temp = PINA & 0x02; 
+	if (temp == 0x02) {
+		count = count + 1;
+	}
+	temp = PINA & 0x04;	
+	if (temp == 0x04) {
+		count = count + 1;
+	} 
+	temp = PINA & 0x08;
+	if (temp == 0x08) {
+		count = count + 1;
+	} 
+	temp = PINA & 0x10;
+	if (temp == 0x10) {
+		count = count + 1;
+	}
+	temp = PINA & 0x20;
+	if (temp == 0x20) {
+		count = count + 1;
+	}
+	temp = PINA & 0x40;
+	if (temp == 0x40) {
+		count = count + 1;
+	}
+	temp = PINA & 0x80;
+	if (temp == 0x80) {
+		count = count + 1;
+	}
+	PORTC = count;		
     }
     return 1;
 }
