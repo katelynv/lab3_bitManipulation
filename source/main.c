@@ -12,15 +12,24 @@
 #include "simAVRHeader.h"
 #endif
 
+unsigned char SetBit(unsigned char x, unsigned char k, unsigned char b) {
+	return (b ? x | (0x01 << k) : x & ~(0x01 << k));
+}
+unsigned char GetBit(unsigned char x, unsigned char k) {
+	return ((x & (0x01 << k)) != 0);
+}
+
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRA = 0x00; PORTA = 0xFF;
 	DDRB = 0x00; PORTB = 0xFF;
 	DDRC = 0xFF; PORTC = 0x00;
 	unsigned char temp = 0x00;
+//	unsigned char tempB = 0x00;
 	unsigned char count = 0x00;
     /* Insert your solution below */
     while (1) {
+
 	temp = PINA & 0x01;
 	if (temp == 0x01) {
 		count = count + 1;
@@ -54,6 +63,19 @@ int main(void) {
 		count = count + 1;
 	}
 	PORTC = count;		
-    }
+ 
+/*	tempA = PINA & 0x00;
+	tempB = PINA & 0x00; 
+	 for(int i = 0; i < 8; ++i) {
+ * 		if (GetBit(tempA, i)) {
+ * 			count = count + 1;
+ * 		}
+ * 		if (GetBit(tempB, i)) {
+ * 			count = count + 1;
+ * 		}
+ * 	}
+ * 	PORTC = count;
+*/ 
+  }
     return 1;
 }
